@@ -1,5 +1,6 @@
 package com.example.btvn.controller;
 
+import com.example.btvn.model.Filter;
 import com.example.btvn.model.Student;
 import com.example.btvn.service.IStudentService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -54,8 +55,12 @@ public class StudentController {
             studentService.delete(idStudent);
             return new ResponseEntity<>(studentOptional.get(), HttpStatus.NO_CONTENT);
         }return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+    }
 
-
+    @GetMapping("/filter")
+    public ResponseEntity<Iterable<Student>> filter (@RequestBody Filter filter){
+        Iterable<Student> students= studentService.filter(filter);
+        return new ResponseEntity<>(students, HttpStatus.OK);
     }
 
 }
