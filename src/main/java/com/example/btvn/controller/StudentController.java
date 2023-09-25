@@ -60,4 +60,10 @@ public class StudentController {
         return new ResponseEntity<>(studentService.searchByName(student.getName()), HttpStatus.OK);
     }
 
+//    @GetMapping("/filter")
+//    public ResponseEntity<Iterable<Student>> filter (@RequestBody Filter filter){
+//        Iterable<Student> students= studentService.filter(filter);
+//        return new ResponseEntity<>(students, HttpStatus.OK);
+//    }
+
 }
