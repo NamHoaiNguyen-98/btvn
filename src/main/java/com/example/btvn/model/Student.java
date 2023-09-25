@@ -20,6 +20,14 @@ public class Student {
     @JoinColumn(name = "idStatus")
     private Status status;
 
+    @ManyToMany
+    @JoinTable(
+            name = "student_subject", // Tên của bảng trung gian
+            joinColumns = @JoinColumn(name = "student_id"), // Tên cột đại diện cho Student
+            inverseJoinColumns = @JoinColumn(name = "subject_id") // Tên cột đại diện cho subject
+    )
+    Set<Subject> subjects;
+
     public Student() {
     }
 
