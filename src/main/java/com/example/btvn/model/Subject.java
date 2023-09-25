@@ -11,26 +11,19 @@ public class Subject {
     private Long idSubject;
     private String name;
     private Integer capacity;
-    @ManyToMany
-    Set<Student> student;
+
 
     public Subject() {
     }
 
-    public Subject(Long idSubject, String name, Integer capacity, Set<Student> student) {
+    public Subject(Long idSubject, String name, Integer capacity) {
         this.idSubject = idSubject;
         this.name = name;
         this.capacity = capacity;
-        this.student = student;
+
     }
 
-    public Set<Student> getStudent() {
-        return student;
-    }
 
-    public void setStudent(Set<Student> student) {
-        this.student = student;
-    }
 
     public Long getIdSubject() {
         return idSubject;
