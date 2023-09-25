@@ -2,9 +2,50 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Subject</title>
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+    <script src="../js/subject.js"></script>
 </head>
-<body>
-
+<body onload="successHandler()">
+<form id="add-subject" style="display: none">
+    <h1>Form create</h1>
+    <table>
+        <tr>
+            <td><label for="name">Name:</label></td>
+            <td><input type="text" id="name" placeholder="name"></td>
+        </tr>
+        <tr>
+            <td><label for="capacity">Capacity:</label></td>
+            <td><input type="text" id="capacity" placeholder="capacity"></td>
+        </tr>
+        <tr>
+            <td></td>
+            <td><button type="submit"  onclick="saveSubject()">Add</button></td>
+        </tr>
+    </table>
+</form>
+<form id="update-form" style="display: none">
+    <h1>Form Update</h1>
+    <table style="margin-left: 40%">
+        <tr>
+            <td><label for="name1">Name:</label></td>
+            <td><input type="text" id="name1" ></td>
+        </tr>
+        <tr>
+            <td><label for="capacity1">Capacity:</label></td>
+            <td><input type="text" id="capacity1" ></td>
+        </tr>
+        <tr>
+            <td></td>
+            <td><button id="submit" type="submit" onclick="edit(this.value)">Update</button> </td>
+        </tr>
+    </table>
+</form>
+<h1 id="title">List subject</h1>
+<div id="div-btn">
+    <button onclick="successHandler()" id="display">Display list subject</button>
+    <button onclick="displayFormCreate()" id="display-create">Create new subject</button>
+</div>
+<div id="subjectList"></div>
 </body>
 </html>
