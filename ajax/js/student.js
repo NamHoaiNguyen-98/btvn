@@ -126,9 +126,9 @@ function updateStudent() {
     let idAddress = $('#address').val();
     let idStatus = $('#status').val();
     if(male.checked) {
-        sex = male.value;
+        sex = male
     } else {
-        sex = female.value
+        sex = female
     }
     let updateStudent = {
         idStudent : idStudent,
