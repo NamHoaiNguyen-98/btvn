@@ -121,7 +121,7 @@ function updateStudent() {
         name : name,
         sex : sex,
         address : {
-            idAddress: idAddress
+            id: idAddress
         },
         status : {
             idStatus: idStatus
