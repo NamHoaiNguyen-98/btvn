@@ -3,7 +3,7 @@ package com.example.btvn.model;
 import java.util.List;
 
 public class Filter {
-    private String name ;
+
     private List<Long> status;
     private List<Long> subject ;
     private List<Integer> sex ;
@@ -13,21 +13,15 @@ public class Filter {
 
     }
 
-    public Filter(String name, List<Long> status, List<Long> subject, List<Integer> sex, List<Long> address) {
-        this.name = name;
+    public Filter(List<Long> status, List<Long> subject, List<Integer> sex, List<Long> address) {
+
         this.status = status;
         this.subject = subject;
         this.sex = sex;
         this.address = address;
     }
 
-    public String getName() {
-        return name;
-    }
 
-    public void setName(String name) {
-        this.name = name;
-    }
 
     public List<Long> getStatus() {
         return status;
