@@ -46,17 +46,19 @@ function successHandler() {
             }
             content += "</table>"
             document.getElementById('subjectList').innerHTML = content;
-            document.getElementById("subjectList").style.display="block"
-            document.getElementById("add-subject").style.display="none";
-            document.getElementById("update-form").style.display="none";
+            document.getElementById("subjectList").style.display = "block"
+            document.getElementById("add-subject").style.display = "none";
+            document.getElementById("update-form").style.display = "none";
         }
     });
 }
+
 function displayFormCreate() {
-    document.getElementById("add-subject").style.display="block";
+    document.getElementById("add-subject").style.display = "block";
     $('#subjectList').hide();
 
 }
+
 function getSubject(subject) {
     return `<tr><td >${subject.name}</td>
             <td >${subject.capacity}</td>` +
@@ -75,10 +77,11 @@ function updateSubject(id) {
             $("#submit").val(`${id}`);
             $("#add-subject").hide();
             // $("#update-form").style.display="block";
-            document.getElementById("update-form").style.display="block";
+            document.getElementById("update-form").style.display = "block";
         }
     })
 }
+
 function edit(id) {
     let name = $('#name1').val();
     let capacity = $('#capacity1').val();
@@ -103,4 +106,39 @@ function edit(id) {
     });
     alert("Update done!")
     event.preventDefault();
+}
+
+function formRegister() {
+    document.getElementById("form-register").style.display='block'
+    document.getElementById("subjectList").style.display='none'
+    selectSubject()
+    selectIdStudent()
+}
+
+function selectSubject() {
+    $.ajax({
+        type: "GET",
+        url: "http://localhost:8080/api/subjects",
+        success: function (data) {
+            let content = "";
+            for (let i = 0; i < data.length; i++) {
+                    content += `<input type="radio" value =${data[i].idSubject}> ${data[i].name}`;
+            }
+            document.getElementById("subject").innerHTML = content;
+        }
+    })
+}
+
+function selectIdStudent() {
+    $.ajax({
+        type: "GET",
+        url: "http://localhost:8080/api/students",
+        success: function (data) {
+            let content = "";
+            for (let i = 0; i < data.length; i++) {
+                content += `<input  type="radio" value =${data[i].idStudent}> ${data[i].name}`;
+            }
+            document.getElementById("idStudent").innerHTML = content;
+        }
+    })
 }
