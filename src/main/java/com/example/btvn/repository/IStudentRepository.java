@@ -13,8 +13,14 @@ import java.util.List;
 
 @Repository
 public interface IStudentRepository extends JpaRepository<Student,Long> {
+
 //    @Query(value="select * from student where name like %?%", nativeQuery = true)
     List<Student> findAllByNameContaining(String name);
+
+    List<Student> findAll();
+    @Query(value="select * from student where name like %?%", nativeQuery = true)
+    List<Student> searchByName(String name);
+
     @Query(value="select * from student  where idStatus=?", nativeQuery = true)
     List<Student> searchByStatus(Long id);
     @Query(value="select * from student where address_id=?", nativeQuery = true)
@@ -23,4 +29,6 @@ public interface IStudentRepository extends JpaRepository<Student,Long> {
     List<Student> searchBySubject(Long id);
     @Query(value="select * from student where sex=?", nativeQuery = true)
     List<Student> searchBySex(String name);
+    @Query(value = "select * from student join student_subject ss on student.idStudent = ss.student_id",nativeQuery = true)
+    Iterable<Student> findAllSubject();
 }

@@ -18,5 +18,7 @@ public interface IStudentService extends IGenerateService<Student> {
 
     Iterable<Student> filter(Filter filter);
 
+    Iterable<Student> findAllSubject();
+
 }
 
