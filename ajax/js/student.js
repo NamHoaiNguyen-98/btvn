@@ -157,17 +157,33 @@ function updateStudent() {
 }
 function searchByName() {
     let name = $('#name1').val();
+<<<<<<< HEAD
     let student = {name: name}
+=======
+>>>>>>> fixsearch
     $.ajax({
-        headers: {
-            'Accept' : 'application/json',
-            'Content-Type' : 'application/json'
-        },
         type: "GET",
+<<<<<<< HEAD
         data: student,
         url: "http://localhost:8080/api/students/searchByName",
         success: function (data) {
             display(data)
+=======
+        url: `http://localhost:8080/api/students/searchByName/${name}`,
+        success: function (data) {
+            let content = ' <table id="display-list" border="1"><tr>\n' +
+                ' <th>Name</td>\n' +
+                ' <th>Sex</td>\n' +
+                ' <th>Address</td>\n' +
+                ' <th>Status</td>\n' +
+                ' <th colspan="2">Option</td>\n' +
+                ' </tr>';
+            for(let i=0; i<data.length; i++) {
+                content += getStudent(data[i])
+            }
+            content += "</table>"
+            document.getElementById('studentList').innerHTML = content;
+>>>>>>> fixsearch
         }
     });
 }

@@ -59,7 +59,7 @@ private IFilter ifilter;
 
     @Override
     public List<Student> searchByName(String name) {
-        return studentRepository.searchByName(name);
+        return studentRepository.findAllByNameContaining(name);
     }
 
     @Override
