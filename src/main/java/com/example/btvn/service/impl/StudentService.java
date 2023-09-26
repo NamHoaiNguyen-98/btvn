@@ -25,7 +25,6 @@ private IFilter ifilter;
 
     @Override
     public Iterable<Student> findAll() {
-
         return studentRepository.findAll();
     }
     @Override
@@ -33,6 +32,12 @@ private IFilter ifilter;
 
         return ifilter.searchByFilter(filter.getSubject() ,filter.getSex() ,filter.getStatus());
     }
+
+    @Override
+    public Iterable<Student> findAllSubject() {
+        return studentRepository.findAllSubject();
+    }
+
 
     @Override
     public Optional<Student> findOne(Long id) {
@@ -56,7 +61,7 @@ private IFilter ifilter;
         studentRepository.deleteById(id);
 
     }
-<<<<<<< HEAD
+
     @Override
     public List<Student> searchByName(String name) {
         return studentRepository.searchByName(name);
@@ -81,7 +86,5 @@ private IFilter ifilter;
     public List<Student> searchBySex(String name) {
         return studentRepository.searchBySex(name);
     }
-=======
 
->>>>>>> ft
 }
