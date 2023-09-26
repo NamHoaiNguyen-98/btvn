@@ -55,9 +55,9 @@ public class StudentController {
             return new ResponseEntity<>(studentOptional.get(), HttpStatus.NO_CONTENT);
         }return new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
-    @GetMapping("/searchByName")
-    public ResponseEntity<Iterable<Student>> searchByName(@RequestBody Student student) {
-        return new ResponseEntity<>(studentService.searchByName(student.getName()), HttpStatus.OK);
+    @GetMapping("/searchByName/{name}")
+    public ResponseEntity<Iterable<Student>> searchByName(@PathVariable String name) {
+        return new ResponseEntity<>(studentService.searchByName(name), HttpStatus.OK);
     }
 
 //    @GetMapping("/filter")
