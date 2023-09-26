@@ -46,13 +46,13 @@ public class StudentService implements IStudentService {
         if (filter.getAddress().size() == 0){
             for (Address subject:
                     addressRepository.findAll()) {
-                filter.getSubject().add(subject.getId());
+                filter.getAddress().add(subject.getId());
             }
         }
         if (filter.getStatus().size() == 0){
             for (Status subject:
                     statusRepository.findAll()) {
-                filter.getSubject().add(subject.getIdStatus());
+                filter.getStatus().add(subject.getIdStatus());
             }
         }
         if (filter.getSex().size() == 0){
