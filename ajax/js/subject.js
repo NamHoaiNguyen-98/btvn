@@ -122,7 +122,7 @@ function selectSubject() {
         success: function (data) {
             let content = "";
             for (let i = 0; i < data.length; i++) {
-                    content += `<input type="radio" value =${data[i].idSubject}> ${data[i].name}`;
+                    content += `<input type="checkbox" value =${data[i].idSubject}> ${data[i].name}`;
             }
             document.getElementById("subject").innerHTML = content;
         }

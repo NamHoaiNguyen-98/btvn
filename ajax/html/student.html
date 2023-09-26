@@ -11,16 +11,20 @@
     <h1>Form</h1>
     <form id="searchByName">
         <label for="name1"></label><input type="text" id="name1">
-        <button onclick="searchByName()">Submit</button>
+        <button type="submit" onclick="searchByName()">Submit</button>
     </form>
     <table>
-        <tr>
-            <td><label for="name">Name:</label></td>
+        <tr> <td><label for="name">Name:</label></td>
             <td><input type="text" id="name" placeholder="name"></td>
         </tr>
         <tr>
-            <td><label for="sex">Sex:</label></td>
-            <td><input type="text" id="sex" placeholder="sex"></td>
+            <td><label>Sex:</label></td>
+            <td>
+                <input type="radio" id="male" name="sex" value="Male" checked>
+                <label for="male">Male</label>
+                <input type="radio" id="female" name="sex" value="Female">
+                <label for="female">Female</label>
+            </td>
         </tr>
         <tr>
             <td><label for="address">Address:</label></td>

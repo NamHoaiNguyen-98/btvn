@@ -1,5 +1,6 @@
 package com.example.btvn.controller;
 
+import com.example.btvn.model.Filter;
 import com.example.btvn.model.Student;
 import com.example.btvn.service.IStudentService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -60,10 +61,10 @@ public class StudentController {
         return new ResponseEntity<>(studentService.searchByName(student.getName()), HttpStatus.OK);
     }
 
-//    @GetMapping("/filter")
-//    public ResponseEntity<Iterable<Student>> filter (@RequestBody Filter filter){
-//        Iterable<Student> students= studentService.filter(filter);
-//        return new ResponseEntity<>(students, HttpStatus.OK);
-//    }
+    @GetMapping("/filter")
+    public ResponseEntity<Iterable<Student>> filter (@RequestBody Filter filter){
+        Iterable<Student> students= studentService.filter(filter);
+        return new ResponseEntity<>(students, HttpStatus.OK);
+    }
 
 }

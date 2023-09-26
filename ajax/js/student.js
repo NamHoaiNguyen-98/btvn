@@ -1,9 +1,16 @@
 4
 function addNewStudent() {
     let name = $('#name').val();
-    let sex = $('#sex').val();
+    let male = $('#male').val();
+    let female = $('#female').val();
+    let sex;
     let idAddress = $('#address').val();
     let idStatus = $('#status').val();
+    if(male.checked) {
+        sex = male;
+    } else {
+        sex = female
+    }
     let newStudent = {
         name : name,
         sex : sex,
@@ -113,9 +120,16 @@ function findById(idStudent) {
 function updateStudent() {
     let idStudent = $('#idStudent').val();
     let name = $('#name').val();
-    let sex = $('#sex').val();
+    let male = $('#male').val();
+    let female = $('#female').val();
+    let sex;
     let idAddress = $('#address').val();
     let idStatus = $('#status').val();
+    if(male.checked) {
+        sex = male
+    } else {
+        sex = female
+    }
     let updateStudent = {
         idStudent : idStudent,
         name : name,
@@ -144,16 +158,16 @@ function updateStudent() {
 function searchByName() {
     let name = $('#name1').val();
     let student = {name: name}
-    console.log(student);
     $.ajax({
         headers: {
             'Accept' : 'application/json',
             'Content-Type' : 'application/json'
         },
         type: "GET",
-        data: JSON.stringify(student),
+        data: student,
         url: "http://localhost:8080/api/students/searchByName",
-        success: display
+        success: function (data) {
+            display(data)
+        }
     });
-    event.preventDefault();
 }
