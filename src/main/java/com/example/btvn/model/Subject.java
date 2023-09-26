@@ -15,15 +15,12 @@ public class Subject {
 
     public Subject() {
     }
-
     public Subject(Long idSubject, String name, Integer capacity) {
         this.idSubject = idSubject;
         this.name = name;
         this.capacity = capacity;
 
     }
-
-
 
     public Long getIdSubject() {
         return idSubject;

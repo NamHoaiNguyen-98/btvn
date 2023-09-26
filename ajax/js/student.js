@@ -1,15 +1,21 @@
-4
+let a = "Male"
+
+function m1(abc) {
+    a = abc.value
+}
+
+
 function addNewStudent() {
     let name = $('#name').val();
-    let male = $('#male').val();
-    let female = $('#female').val();
-    let sex;
+    let male = $('#male').prop("checked");
+    let female = $('#female').prop("checked");
+    var sex
     let idAddress = $('#address').val();
     let idStatus = $('#status').val();
-    if(male.checked) {
-        sex = male;
+    if(male) {
+        sex = "Male"
     } else {
-        sex = female
+        sex = "Female"
     }
     let newStudent = {
         name : name,
@@ -137,7 +143,7 @@ function updateStudent() {
     let name = $('#name').val();
     let male = $('#male').val();
     let female = $('#female').val();
-    let sex;
+    var sex;
     let idAddress = $('#address').val();
     let idStatus = $('#status').val();
     if(male.checked) {

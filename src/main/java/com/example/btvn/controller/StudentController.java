@@ -3,6 +3,7 @@ package com.example.btvn.controller;
 import com.example.btvn.model.Filter;
 import com.example.btvn.model.Student;
 import com.example.btvn.service.IStudentService;
+import com.example.btvn.service.ISubjectService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -16,10 +17,17 @@ import java.util.Optional;
 public class StudentController {
     @Autowired
     private IStudentService studentService;
+    @Autowired
+    private ISubjectService subjectService;
 
     @GetMapping
     public ResponseEntity<Iterable<Student>> display() {
-        Iterable<Student> students = studentService.findAll();
+        //Iterable<Student> students = studentService.findAll();
+        return new ResponseEntity<>(studentService.findAll(), HttpStatus.OK);
+    }
+    @GetMapping("/subject")
+    public ResponseEntity<Iterable<Student>> subj(){
+        Iterable<Student> students = studentService.findAllSubject();
         return new ResponseEntity<>(students, HttpStatus.OK);
     }
 

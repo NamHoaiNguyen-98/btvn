@@ -1,7 +1,7 @@
 package com.example.btvn.model;
 
 import javax.persistence.*;
-import java.util.Set;
+import java.util.*;
 
 @Entity
 @Table(name = "student")
@@ -20,13 +20,13 @@ public class Student {
     @JoinColumn(name = "idStatus")
     private Status status;
 
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(
             name = "student_subject", // Tên của bảng trung gian
             joinColumns = @JoinColumn(name = "student_id"), // Tên cột đại diện cho Student
             inverseJoinColumns = @JoinColumn(name = "subject_id") // Tên cột đại diện cho subject
     )
-    Set<Subject> subjects;
+    Set<Subject> subjects = new HashSet<>();
 
     public Student() {
     }
@@ -38,6 +38,14 @@ public class Student {
         this.address = address;
         this.subjects_count = subjects_count;
         this.status = status;
+    }
+
+    public Set<Subject> getSubjects() {
+        return subjects;
+    }
+
+    public void setSubjects(Set<Subject> subjects) {
+        this.subjects = subjects;
     }
 
     public Long getIdStudent() {
