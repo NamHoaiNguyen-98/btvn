@@ -94,7 +94,12 @@ public class StudentService implements IStudentService {
 
     @Override
     public Iterable<Student> findAllSubject() {
-        return studentRepository.findAllSubject();
+        return null;
+    }
+
+    @Override
+    public void addSubjectStudent(Long idStudent,Long idSubject) {
+        studentRepository.addSubjectStudent(idStudent,idSubject);
     }
 
 
