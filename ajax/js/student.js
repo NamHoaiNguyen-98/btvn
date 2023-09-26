@@ -48,7 +48,7 @@ function display() {
                 ' <th>Address</td>\n' +
                 ' <th>Status</td>\n' +
                 ' <th>Subject</td>\n' +
-                ' <th colspan="2">Option</td>\n' +
+                ' <th colspan="3">Option</td>\n' +
                 ' </tr>';
             for(let i=0; i<data.length; i++) {
                 content += `<tr>
@@ -60,7 +60,8 @@ function display() {
                 for (let j=0;  j<data[i].subjects.length; j++) {
                     content += `<div>  ${data[i].subjects[j].name} </div>`;
                 }
-                   content+= `</td><td class="btn"><button class="deleteStudent" onclick="deleteStudent(${data[i].idStudent})">Delete</button></td>` +
+                   content+= `</td><td class="btn"><button class="deleteStudent" onclick="formAddSubject(${data[i].idStudent})">+ Subject</button></td>
+                    <td class="btn"><button class="deleteStudent" onclick="deleteStudent(${data[i].idStudent})">Delete</button></td>` +
                     `<td class="btn"><button class="updateStudent" onclick="findById(${data[i].idStudent})">Update</button></td>
                </tr>`;
 
@@ -71,7 +72,33 @@ function display() {
         }
     });
 }
+function formAddSubject(id) {
+    $.ajax({
+        type: "GET",
+        url: `http://localhost:8080/api/students/subjects`,
+        success: function (data){
+            let content=''
+            for (let i = 0; i < data.length; i++) {
+                content+= `<option value="${data[i].idSubject}">${data[i].name}</option>`
+            }
+            document.getElementById("idS").innerHTML=id
+            document.getElementById("sub3").innerHTML=content
+        }
+    })
+}
+function addSubject() {
+    let id = document.getElementById("idS").value
+    let idSubject= document.getElementById("sub3").value
+    $.ajax({
+        type: "POST",
+        url: `http://localhost:8080/api/students/${id}/${idSubject}`,
+        success: function (){
+            alert("Add success! ")
+            display()
+        }
+    })
 
+}
 function getStudent(student) {
     return`<tr>
                <td>${student.name}</td>

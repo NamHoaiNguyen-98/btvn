@@ -35,7 +35,12 @@ private IFilter ifilter;
 
     @Override
     public Iterable<Student> findAllSubject() {
-        return studentRepository.findAllSubject();
+        return null;
+    }
+
+    @Override
+    public void addSubjectStudent(Long idStudent,Long idSubject) {
+        studentRepository.addSubjectStudent(idStudent,idSubject);
     }
 
 

@@ -3,6 +3,7 @@ import com.example.btvn.model.Filter;
 import com.example.btvn.model.Student;
 
 import java.util.List;
+import java.util.Optional;
 
 public interface IStudentService extends IGenerateService<Student> {
 
@@ -19,6 +20,8 @@ public interface IStudentService extends IGenerateService<Student> {
     Iterable<Student> filter(Filter filter);
 
     Iterable<Student> findAllSubject();
+
+    void addSubjectStudent(Long idStudent ,Long idSubject);
 
 }
 
