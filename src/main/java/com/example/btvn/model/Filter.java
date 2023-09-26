@@ -6,14 +6,14 @@ public class Filter {
 
     private List<Long> status;
     private List<Long> subject ;
-    private List<Integer> sex ;
+    private List<String> sex ;
     private List<Long> address;
 
     public Filter() {
 
     }
 
-    public Filter(List<Long> status, List<Long> subject, List<Integer> sex, List<Long> address) {
+    public Filter(List<Long> status, List<Long> subject, List<String> sex, List<Long> address) {
 
         this.status = status;
         this.subject = subject;
@@ -39,11 +39,11 @@ public class Filter {
         this.subject = subject;
     }
 
-    public List<Integer> getSex() {
+    public List<String> getSex() {
         return sex;
     }
 
-    public void setSex(List<Integer> sex) {
+    public void setSex(List<String> sex) {
         this.sex = sex;
     }
 
