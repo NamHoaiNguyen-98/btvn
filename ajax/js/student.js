@@ -157,18 +157,8 @@ function updateStudent() {
 }
 function searchByName() {
     let name = $('#name1').val();
-<<<<<<< HEAD
-    let student = {name: name}
-=======
->>>>>>> fixsearch
     $.ajax({
         type: "GET",
-<<<<<<< HEAD
-        data: student,
-        url: "http://localhost:8080/api/students/searchByName",
-        success: function (data) {
-            display(data)
-=======
         url: `http://localhost:8080/api/students/searchByName/${name}`,
         success: function (data) {
             let content = ' <table id="display-list" border="1"><tr>\n' +
@@ -183,7 +173,7 @@ function searchByName() {
             }
             content += "</table>"
             document.getElementById('studentList').innerHTML = content;
->>>>>>> fixsearch
         }
     });
+    event.preventDefault();
 }
