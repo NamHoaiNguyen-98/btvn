@@ -76,11 +76,39 @@ function displayStatus() {
         success: function (data) {
             let content = "";
             for (let i=0;  i<data.length; i++) {
-                content += `<option value =${data[i].idStatus}> ${data[i].name} </option>`;
+                content += `<option value =${data[i].idStatus} > ${data[i].name} </option>`;
             }
             document.getElementById("status").innerHTML = content;
+            document.getElementById("searchStatus").innerHTML = content;
         }
     })
+}
+function searchByStatus() {
+    displayStatus()
+    let id = $('#searchStatus').val();
+    $.ajax({
+        type: "GET",
+        url: `http://localhost:8080/api/students/searchByStatus/${id}`,
+        success:
+            function (data) {
+                let content = ' <table id="display-list" border="1"><tr>\n' +
+                    ' <th>Name</td>\n' +
+                    ' <th>Sex</td>\n' +
+                    ' <th>Address</td>\n' +
+                    ' <th>Status</td>\n' +
+                    ' <th colspan="2">Option</td>\n' +
+                    ' </tr>';
+                for(let i=0; i<data.length; i++) {
+                    content += getStudent(data[i])
+                }
+                content += "</table>"
+                document.getElementById('studentList').innerHTML = content;
+            }
+    });
+    event.preventDefault();
+}
+function searchBySubject() {
+
 }
 function displayAddress() {
     $.ajax({
