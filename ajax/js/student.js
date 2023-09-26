@@ -1,8 +1,3 @@
-let a = "Male"
-
-function m1(abc) {
-    a = abc.value
-}
 
 
 function addNewStudent() {
