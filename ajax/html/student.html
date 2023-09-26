@@ -11,10 +11,22 @@
     <h1>Form</h1>
     <form id="searchByName">
         <label for="name1"></label><input type="text" id="name1">
-        <button type="submit" onclick="searchByName()">Submit</button>
+        <button type="submit" onclick="searchByName()">Search</button>
+    </form>
+    <form>
+        <label for="searchStatus">Search By Status:</label>
+        <select id="searchStatus"></select>
+        <button onclick="searchByStatus()">Search</button>
+    </form>
+
+    <form>
+        <label for="searchSubject">Search By Subject:</label>
+        <select id="searchSubject"></select>
+        <button onclick="searchBySubject()">Search</button>
     </form>
     <table>
-        <tr> <td><label for="name">Name:</label></td>
+        <tr>
+            <td><label for="name">Name:</label></td>
             <td><input type="text" id="name" placeholder="name"></td>
         </tr>
         <tr>
@@ -28,14 +40,14 @@
         </tr>
         <tr>
             <td><label for="address">Address:</label></td>
-            <td><select  id="address"></select></td>
+            <td><select id="address"></select></td>
         </tr>
         <tr>
             <td><label for="status">Status:</label></td>
-            <td><select  id="status"></select></td>
+            <td><select id="status"></select></td>
         </tr>
         <tr>
-            <td><input type="hidden" id="idStudent" ></td>
+            <td><input type="hidden" id="idStudent"></td>
         </tr>
         <tr>
             <td></td>
