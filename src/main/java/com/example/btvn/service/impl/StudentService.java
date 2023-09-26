@@ -56,7 +56,7 @@ private IFilter ifilter;
         studentRepository.deleteById(id);
 
     }
-<<<<<<< HEAD
+
     @Override
     public List<Student> searchByName(String name) {
         return studentRepository.searchByName(name);
@@ -81,7 +81,5 @@ private IFilter ifilter;
     public List<Student> searchBySex(String name) {
         return studentRepository.searchBySex(name);
     }
-=======
 
->>>>>>> ft
 }
