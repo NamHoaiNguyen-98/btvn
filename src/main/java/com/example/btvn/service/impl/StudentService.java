@@ -1,10 +1,8 @@
 package com.example.btvn.service.impl;
 
-import com.example.btvn.model.Filter;
-import com.example.btvn.model.Student;
+import com.example.btvn.model.*;
 
-import com.example.btvn.repository.IFilter;
-import com.example.btvn.repository.IStudentRepository;
+import com.example.btvn.repository.*;
 import com.example.btvn.service.IStudentService;
 
 
@@ -12,25 +10,86 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 
 @Service
 public class StudentService implements IStudentService {
-@Autowired
-private IStudentRepository studentRepository;
+    @Autowired
+    private IStudentRepository studentRepository;
 
-@Autowired
-private IFilter ifilter;
+    @Autowired
+    private ISubjectRepository subjectRepository;
+
 
     @Override
     public Iterable<Student> findAll() {
         return studentRepository.findAll();
     }
+
     @Override
     public Iterable<Student> filter(Filter filter) {
+        List<Student> listAll = studentRepository.findAll();
 
-        return ifilter.searchByFilter(filter.getSubject() ,filter.getSex() ,filter.getStatus());
+        List<Student> ft = listAll;
+        if (filter.getAddress().size() != 0) {
+            for (int i = 0; i < listAll.size(); i++) {
+                if (!(check(listAll.get(i).getAddress().getId(), filter.getAddress()))
+                        || !(check(listAll.get(i).getStatus().getIdStatus(), filter.getStatus()))
+                        || !(checkString(listAll.get(i).getSex(), filter.getSex()))
+                        || !(checkSubject(listAll.get(i).getSubjects(), filter.getSubject()))
+                ) {
+                    if (ft.get(i) != null) {
+                        ft.set(i, null);
+                    }
+                }
+            }
+        }
+        List<Student> listFt = new ArrayList<>();
+        for (Student s :
+                ft) {
+            if (s != null) {
+                listFt.add(s);
+            }
+        }
+        Iterable<Student> students = listFt;
+        return students;
+
+    }
+
+    public boolean checkSubject(Set<Subject> subjects, List<Long> longList) {
+        for (int i = 0; i < longList.size(); i++) {
+            for (Subject s :
+                    subjects) {
+                if (s.getIdSubject() == longList.get(i)) {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
+
+    public boolean check(Long aLong, List<Long> longList) {
+        for (Long l :
+                longList) {
+            if (l == aLong) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public boolean checkString(String s, List<String> stringList) {
+        for (String l :
+                stringList) {
+            if (l.equals(s)) {
+                return true;
+            }
+        }
+        return false;
     }
 
     @Override
@@ -41,7 +100,7 @@ private IFilter ifilter;
 
     @Override
     public Optional<Student> findOne(Long id) {
-         return studentRepository.findById(id);
+        return studentRepository.findById(id);
     }
 
     @Override
