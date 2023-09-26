@@ -22,6 +22,11 @@ public class StudentService implements IStudentService {
 
     @Autowired
     private ISubjectRepository subjectRepository;
+    @Autowired
+    private IStatusRepository statusRepository;
+    @Autowired
+    private IAddressRepository addressRepository;
+
 
 
     @Override
@@ -32,9 +37,31 @@ public class StudentService implements IStudentService {
     @Override
     public Iterable<Student> filter(Filter filter) {
         List<Student> listAll = studentRepository.findAll();
+        if (filter.getSubject().size() == 0){
+            for (Subject subject:
+                    subjectRepository.findAll()) {
+                filter.getSubject().add(subject.getIdSubject());
+            }
+        }
+        if (filter.getAddress().size() == 0){
+            for (Address subject:
+                    addressRepository.findAll()) {
+                filter.getSubject().add(subject.getId());
+            }
+        }
+        if (filter.getStatus().size() == 0){
+            for (Status subject:
+                    statusRepository.findAll()) {
+                filter.getSubject().add(subject.getIdStatus());
+            }
+        }
+        if (filter.getSex().size() == 0){
+            filter.getSex().add("Nam");
+            filter.getSex().add("Nữ");
+        }
 
         List<Student> ft = listAll;
-        if (filter.getAddress().size() != 0) {
+
             for (int i = 0; i < listAll.size(); i++) {
                 if (!(check(listAll.get(i).getAddress().getId(), filter.getAddress()))
                         || !(check(listAll.get(i).getStatus().getIdStatus(), filter.getStatus()))
@@ -46,7 +73,7 @@ public class StudentService implements IStudentService {
                     }
                 }
             }
-        }
+
         List<Student> listFt = new ArrayList<>();
         for (Student s :
                 ft) {
