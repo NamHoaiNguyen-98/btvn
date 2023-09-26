@@ -47,12 +47,26 @@ function display() {
                 ' <th>Sex</td>\n' +
                 ' <th>Address</td>\n' +
                 ' <th>Status</td>\n' +
+                ' <th>Subject</td>\n' +
                 ' <th colspan="2">Option</td>\n' +
                 ' </tr>';
             for(let i=0; i<data.length; i++) {
-                content += getStudent(data[i])
+                content += `<tr>
+               <td>${data[i].name}</td>
+               <td>${data[i].sex}</td>
+               <td>${data[i].address.name}</td>`+
+                    `<td>${data[i].status.name}</td>`
+                content+= "<td>"
+                for (let j=0;  j<data[i].subjects.length; j++) {
+                    content += `<div>  ${data[i].subjects[j].name} </div>`;
+                }
+                content+= `</td><td class="btn"><button class="deleteStudent" onclick="deleteStudent(${data[i].idStudent})">Delete</button></td>` +
+                    `<td class="btn"><button class="updateStudent" onclick="findById(${data[i].idStudent})">Update</button></td>
+               </tr>`;
+
             }
             content += "</table>"
+            console.log(content)
             document.getElementById('studentList').innerHTML = content;
         }
     });
@@ -95,6 +109,7 @@ function displayAddress() {
         }
     })
 }
+
 function deleteStudent(idStudent) {
     $.ajax({
         type: "DELETE",
@@ -157,18 +172,8 @@ function updateStudent() {
 }
 function searchByName() {
     let name = $('#name1').val();
-<<<<<<< HEAD
-    let student = {name: name}
-=======
->>>>>>> fixsearch
     $.ajax({
         type: "GET",
-<<<<<<< HEAD
-        data: student,
-        url: "http://localhost:8080/api/students/searchByName",
-        success: function (data) {
-            display(data)
-=======
         url: `http://localhost:8080/api/students/searchByName/${name}`,
         success: function (data) {
             let content = ' <table id="display-list" border="1"><tr>\n' +
@@ -183,7 +188,7 @@ function searchByName() {
             }
             content += "</table>"
             document.getElementById('studentList').innerHTML = content;
->>>>>>> fixsearch
         }
     });
+    event.preventDefault();
 }
