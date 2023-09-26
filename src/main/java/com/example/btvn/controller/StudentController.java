@@ -68,6 +68,14 @@ public class StudentController {
     public ResponseEntity<Iterable<Student>> searchByName(@PathVariable String name) {
         return new ResponseEntity<>(studentService.searchByName(name), HttpStatus.OK);
     }
+    @GetMapping("/searchByStatus/{id}")
+    public ResponseEntity<Iterable<Student>> searchByStatus(@PathVariable Long id) {
+        return new ResponseEntity<>(studentService.searchByStatus(id), HttpStatus.OK);
+    }
+    @GetMapping("/searchBySubject/{id}")
+    public ResponseEntity<Iterable<Student>> searchBySubject(@PathVariable Long id) {
+        return new ResponseEntity<>(studentService.searchBySubject(id), HttpStatus.OK);
+    }
 
     @GetMapping("/filter")
     public ResponseEntity<Iterable<Student>> filter (@RequestBody Filter filter){
