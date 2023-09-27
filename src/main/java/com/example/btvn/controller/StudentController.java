@@ -2,6 +2,7 @@ package com.example.btvn.controller;
 
 import com.example.btvn.model.Filter;
 import com.example.btvn.model.Student;
+import com.example.btvn.model.Subject;
 import com.example.btvn.service.IStudentService;
 import com.example.btvn.service.ISubjectService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,13 +23,17 @@ public class StudentController {
 
     @GetMapping
     public ResponseEntity<Iterable<Student>> display() {
-        //Iterable<Student> students = studentService.findAll();
         return new ResponseEntity<>(studentService.findAll(), HttpStatus.OK);
     }
-    @GetMapping("/subject")
-    public ResponseEntity<Iterable<Student>> subj(){
-        Iterable<Student> students = studentService.findAllSubject();
-        return new ResponseEntity<>(students, HttpStatus.OK);
+    @GetMapping("/subjects")
+    public ResponseEntity<Iterable<Subject>>showSubject(){
+        return new ResponseEntity<>(subjectService.findAll(),HttpStatus.OK);
+    }
+
+    @PostMapping ("/{idStudent}/{idSubject}")
+    public ResponseEntity<Void> sub(@PathVariable Long idStudent,@PathVariable Long idSubject){
+        studentService.addSubjectStudent(idStudent,idSubject);
+        return new ResponseEntity<>(HttpStatus.CREATED);
     }
 
     @PostMapping

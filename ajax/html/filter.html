@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+
+</head>
+<body onload="displayFilter()">
+<form >
+    <label id="FTStatus">
+
+    </label>
+    <br>
+    <label id="FTSubjects">
+
+    </label>
+    <br>
+    <label id="FTAddress">
+    </label>
+    <br>
+    <label id="FTSex">
+        <input type="checkbox" class="sex" name="sex" value="Nam"> Nam
+        <input type="checkbox" class="sex"  name="sex" value="Nữ"> Nữ
+    </label>
+    <br>
+    <button id="getDataButton"  onclick="takeFilter()">Lấy dữ liệu</button>
+<!--            onclick="filter()"-->
+
+
+</form>
+<div id="studentList"></div >
+<script src="../js/filter.js"></script>
+</body>
+</html>

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns="http://www.w3.org/1999/html">
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
     <title>List Student</title>
@@ -58,6 +58,17 @@
 </form>
 <br>
 <div id="studentList"></div>
+<br>
+<div id="form-create-subject">
+    <h5>Add subject</h5>
+    <form>
+        <td><input type="hidden" id="idS"></td>
+        <tr> <td><label for="sub3">Subject:</label></td>
+            <select name="sub3" id="sub3"></select>
+        </tr>
+        <button id="studentID" onclick="addSubject()">Add subject</button>
+    </form>
+</div>
 </body>
 <script src="../js/student.js"></script>
 </html>
