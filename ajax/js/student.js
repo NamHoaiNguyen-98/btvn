@@ -1,4 +1,5 @@
 function saveStudent() {
+    let count = 0;
     let newStudent;
     let name = $('#name').val();
     let male = $('#male').prop("checked");
@@ -13,8 +14,13 @@ function saveStudent() {
     }
     let arr=[]
     $.each($('input[name="subject"]:checked'), function() {
-        var idSub = $(this).val()
-        arr.push(idSub)
+        if(count < 3) {
+            var idSub = $(this).val()
+            arr.push(idSub)
+            count++
+        } else {
+            alert("Bạn đã đăng ký quá 3 môn học")
+        }
     });
     if (idStudent !== 0) {
         newStudent = {
@@ -79,12 +85,13 @@ function display() {
         type: "GET",
         url: "http://localhost:8080/api/students",
         success: function (data) {
-            let content = ' <table id="display-list" border="1"><tr>\n' +
+            let content = ' <table id="display-list" border="1" style="text-align: center"><tr>\n' +
                 ' <th>ID</th></td>\n' +
                 ' <th>Name</td>\n' +
                 ' <th>Sex</td>\n' +
                 ' <th>Address</td>\n' +
                 ' <th>Status</td>\n' +
+                ' <th>Count Subject</td>\n' +
                 ' <th>Subject</td>\n' +
                 ' <th colspan="3">Option</td>\n' +
                 ' </tr>';
@@ -94,8 +101,9 @@ function display() {
                <td>${data[i].name}</td>
                <td>${data[i].sex}</td>
                <td>${data[i].address.name}</td>` +
-                    `<td>${data[i].status.name}</td>`
-                content += "<td>"
+                    `<td>${data[i].status.name}</td>`+
+                    `<td>${data[i].subjects.length}</td>`
+                +"<td>"
                 for (let j = 0; j < data[i].subjects.length; j++) {
                     content += `<div>  ${data[i].subjects[j].name} </div>`;
                 }
@@ -118,7 +126,6 @@ function findById(idStudent) {
             $("#name").val(`${student.name}`);
             $("#male").prop("checked", student.sex === "Nam");
             $("#female").prop("checked", student.sex === "Nữ");
-            // $("#sex").val(`${student.sex}`);
             $("#address").val(`${student.address.id}`);
             $("#status").val(`${student.status.idStatus}`);
             localStorage.setItem("idUpdate", student.idStudent)
