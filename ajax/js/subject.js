@@ -1,11 +1,10 @@
 function saveSubject() {
+    let newSubject;
     //lấy dữ liệu từ form html
     let name = $("#name").val();
-    let capacity = $('#capacity').val();
 
-    let newSubject = {
+    newSubject = {
         name: name,
-        capacity: capacity
     };
     // gọi phương thức ajax
     $.ajax({

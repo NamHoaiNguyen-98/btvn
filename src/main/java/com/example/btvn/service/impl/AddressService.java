@@ -23,14 +23,9 @@ public class AddressService implements IAddressService {
     }
 
     @Override
-    public void create(Address address) {
+    public void save(Address address) {
         addressRepository.save(address);
 
-    }
-
-    @Override
-    public Address update(Address address) {
-        return addressRepository.save(address);
     }
 
     @Override

@@ -20,8 +20,8 @@ public class SubjectController {
         return new ResponseEntity<>(subjectService.findAll(), HttpStatus.OK);
     }
     @PostMapping
-    public ResponseEntity<Subject> createSubject(@RequestBody Subject subject) {
-        subjectService.create(subject);
+    public ResponseEntity<?> saveSubject(@RequestBody Subject subject) {
+        subjectService.save(subject);
         return new ResponseEntity<>( HttpStatus.CREATED);
     }
     @GetMapping("/{id}")
@@ -32,14 +32,6 @@ public class SubjectController {
         }
         return new ResponseEntity<>(subjectOptional.get(),HttpStatus.OK);
     }
-    @PutMapping("/{id}")
-    public ResponseEntity<Subject> updateSubject(@PathVariable Long id,@RequestBody Subject subject){
-        Optional<Subject> smartphoneOptional = subjectService.findOne(id);
-        if (!smartphoneOptional.isPresent()){
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-        }
-        subject.setIdSubject(id);
-        return new ResponseEntity<>(subjectService.update(subject), HttpStatus.OK);
-    }
+
 
 }

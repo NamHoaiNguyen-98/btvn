@@ -23,15 +23,11 @@ public class SubjectService implements ISubjectService {
     }
 
     @Override
-    public void create(Subject subject) {
+    public void save(Subject subject) {
         subjectRepository.save(subject);
     }
 
-    @Override
-    public Subject update(Subject subject) {
 
-        return subjectRepository.save(subject);
-    }
 
     @Override
     public void delete(Long id) {

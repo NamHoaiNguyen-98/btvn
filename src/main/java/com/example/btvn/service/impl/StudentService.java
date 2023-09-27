@@ -136,16 +136,11 @@ public class StudentService implements IStudentService {
     }
 
     @Override
-    public void create(Student student) {
+    public void save(Student student) {
         studentRepository.save(student);
 
     }
 
-    @Override
-    public Student update(Student student) {
-
-        return studentRepository.save(student);
-    }
 
     @Override
     public void delete(Long id) {

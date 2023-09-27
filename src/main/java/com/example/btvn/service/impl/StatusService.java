@@ -26,16 +26,12 @@ public class StatusService implements IStatusService {
     }
 
     @Override
-    public void create(Status status) {
+    public void save(Status status) {
         statusRepository.save(status);
 
     }
 
-    @Override
-    public Status update(Status status) {
-        statusRepository.save(status);
-        return status;
-    }
+
 
     @Override
     public void delete(Long id) {

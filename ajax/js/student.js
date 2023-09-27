@@ -1,37 +1,59 @@
-
-function addNewStudent() {
+function saveStudent() {
+    let newStudent;
     let name = $('#name').val();
     let male = $('#male').prop("checked");
     var sex
     let idAddress = $('#address').val();
     let idStatus = $('#status').val();
-    if(male) {
+    let idStudent = +localStorage.getItem("idUpdate")
+    if (male) {
         sex = "Male"
     } else {
         sex = "Female"
     }
-    let newStudent = {
-        name : name,
-        sex : sex,
-        address : {
-            id : idAddress
-        },
-        status : {
-            idStatus: idStatus
+    if (idStudent !== 0) {
+        newStudent = {
+            idStudent: idStudent,
+            name: name,
+            sex: sex,
+            address: {
+                id: idAddress
+            },
+            status: {
+                idStatus: idStatus
+            }
         }
-    };
-
-    $.ajax( {
+    } else {
+        newStudent = {
+            name: name,
+            sex: sex,
+            address: {
+                id: idAddress
+            },
+            status: {
+                idStatus: idStatus
+            }
+        }
+    }
+    $.ajax({
         headers: {
-            'Accept' : 'application/json',
+            'Accept': 'application/json',
             'Content-Type': 'application/json'
         },
-        type : "POST",
-        data : JSON.stringify(newStudent),
-        url : "http://localhost:8080/api/students",
-        success: display
+        type: "POST",
+        data: JSON.stringify(newStudent),
+        url: "http://localhost:8080/api/students",
+        success: function () {
+            alert("save success")
+            display()
+            localStorage.setItem("idUpdate", "0")
+        }
 
-    });
+
+    })
+    document.getElementById("form").reset()
+    event.preventDefault()
+
 }
 
 function display() {
@@ -39,9 +61,10 @@ function display() {
     displayStatus();
     $.ajax({
         type: "GET",
-        url:"http://localhost:8080/api/students",
+        url: "http://localhost:8080/api/students",
         success: function (data) {
             let content = ' <table id="display-list" border="1"><tr>\n' +
+                ' <th>ID</th></td>\n' +
                 ' <th>Name</td>\n' +
                 ' <th>Sex</td>\n' +
                 ' <th>Address</td>\n' +
@@ -49,49 +72,65 @@ function display() {
                 ' <th>Subject</td>\n' +
                 ' <th colspan="3">Option</td>\n' +
                 ' </tr>';
-            for(let i=0; i<data.length; i++) {
+            for (let i = 0; i < data.length; i++) {
                 content += `<tr>
+               <td>${data[i].idStudent}</td>
                <td>${data[i].name}</td>
                <td>${data[i].sex}</td>
-               <td>${data[i].address.name}</td>`+
+               <td>${data[i].address.name}</td>` +
                     `<td>${data[i].status.name}</td>`
-                content+= "<td>"
-                for (let j=0;  j<data[i].subjects.length; j++) {
+                content += "<td>"
+                for (let j = 0; j < data[i].subjects.length; j++) {
                     content += `<div>  ${data[i].subjects[j].name} </div>`;
                 }
-                   content+= `</td><td class="btn"><button class="deleteStudent" onclick="formAddSubject(${data[i].idStudent})">+ Subject</button></td>
+                content += `</td><td class="btn"><button class="deleteStudent" onclick="formAddSubject(${data[i].idStudent})">+ Subject</button></td>
                     <td class="btn"><button class="deleteStudent" onclick="deleteStudent(${data[i].idStudent})">Delete</button></td>` +
                     `<td class="btn"><button class="updateStudent" onclick="findById(${data[i].idStudent})">Update</button></td>
                </tr>`;
 
             }
             content += "</table>"
-            console.log(content)
             document.getElementById('studentList').innerHTML = content;
         }
     });
 }
+
+function findById(idStudent) {
+    $.ajax({
+        type: "GET",
+        url: `http://localhost:8080/api/students/${idStudent}`,
+        success: function (student) {
+            $("#name").val(`${student.name}`);
+            $("#sex").val(`${student.sex}`);
+            $("#address").val(`${student.address}`);
+            $("#status").val(`${student.status}`);
+            localStorage.setItem("idUpdate", student.idStudent)
+        }
+    })
+}
+
 function formAddSubject(id) {
     $.ajax({
         type: "GET",
         url: `http://localhost:8080/api/students/subjects`,
-        success: function (data){
-            let content=''
+        success: function (data) {
+            let content = ''
             for (let i = 0; i < data.length; i++) {
-                content+= `<option value="${data[i].idSubject}">${data[i].name}</option>`
+                content += `<option value="${data[i].idSubject}">${data[i].name}</option>`
             }
-            document.getElementById("idS").value=id
-            document.getElementById("sub3").innerHTML=content
+            document.getElementById("idS").value = id
+            document.getElementById("sub3").innerHTML = content
         }
     })
 }
-function addSubject() {
+
+function saveSubject() {
     let id = document.getElementById("idS").value
-    let idSubject= document.getElementById("sub3").value
+    let idSubject = document.getElementById("sub3").value
     console.log(id)
     $.ajax({
         headers: {
-            'Accept' : 'application/json',
+            'Accept': 'application/json',
             'Content-Type': 'application/json'
         },
         type: "POST",
@@ -99,8 +138,9 @@ function addSubject() {
         success: display
     })
 }
+
 function getStudent(student) {
-    return`<tr>
+    return `<tr>
                <td>${student.name}</td>
                <td>${student.sex}</td>
                <td>${student.address.name}</td>
@@ -116,7 +156,7 @@ function displayStatus() {
         url: "http://localhost:8080/api/status",
         success: function (data) {
             let content = "";
-            for (let i=0;  i<data.length; i++) {
+            for (let i = 0; i < data.length; i++) {
                 content += `<option value =${data[i].idStatus} > ${data[i].name} </option>`;
             }
             document.getElementById("status").innerHTML = content;
@@ -124,6 +164,7 @@ function displayStatus() {
         }
     })
 }
+
 function searchByStatus() {
     displayStatus()
     let id = $('#searchStatus').val();
@@ -139,7 +180,7 @@ function searchByStatus() {
                     ' <th>Status</td>\n' +
                     ' <th colspan="2">Option</td>\n' +
                     ' </tr>';
-                for(let i=0; i<data.length; i++) {
+                for (let i = 0; i < data.length; i++) {
                     content += getStudent(data[i])
                 }
                 content += "</table>"
@@ -148,16 +189,18 @@ function searchByStatus() {
     });
     event.preventDefault();
 }
+
 function searchBySubject() {
 
 }
+
 function displayAddress() {
     $.ajax({
         type: "GET",
         url: "http://localhost:8080/api/addresses",
         success: function (data) {
             let content = "";
-            for (let i=0;  i<data.length; i++) {
+            for (let i = 0; i < data.length; i++) {
                 content += `<option value =${data[i].id}> ${data[i].name} </option>`;
             }
             document.getElementById("address").innerHTML = content;
@@ -167,63 +210,16 @@ function displayAddress() {
 
 function deleteStudent(idStudent) {
     $.ajax({
+        url: `http://localhost:8080/api/students/${idStudent}`,
         type: "DELETE",
-        //tên API
-        url: `http://localhost:8080/api/students/${idStudent}`,
-        //xử lý khi thành công
-        success: display
+        success: function () {
+            alert("Delete successfully!")
+            display()
+        }
     });
 }
-function findById(idStudent) {
-    $.ajax({
-        type: "GET",
-        url: `http://localhost:8080/api/students/${idStudent}`,
-        success : function (student) {
-            $("#name").val(`${student.name}`);
-            $("#sex").val(`${student.sex}`);
-            $("#address").val(`${student.address}`);
-            $("#status").val(`${student.status}`);
-            $("#idStudent").val(`${student.idStudent}`);
-        }
-    })
-}
-function updateStudent() {
-    let idStudent = $('#idStudent').val();
-    let name = $('#name').val();
-    let male = $('#male').prop("checked");
-    var sex
-    let idAddress = $('#address').val();
-    let idStatus = $('#status').val();
-    if(male) {
-        sex = "Male"
-    } else {
-        sex = "Female"
-    }
-    let updateStudent = {
-        idStudent : idStudent,
-        name : name,
-        sex : sex,
-        address : {
-            id: idAddress
-        },
-        status : {
-            idStatus: idStatus
-        }
-    };
 
-    $.ajax( {
-        headers: {
-            'Accept' : 'application/json',
-            'Content-Type': 'application/json'
-        },
-        type : "PUT",
-        data : JSON.stringify(updateStudent),
-        url : `http://localhost:8080/api/students/${idStudent}`,
-        success: display
 
-    });
-    event.preventDefault();
-}
 function searchByName() {
     let name = $('#name1').val();
     $.ajax({
@@ -237,7 +233,7 @@ function searchByName() {
                 ' <th>Status</td>\n' +
                 ' <th colspan="2">Option</td>\n' +
                 ' </tr>';
-            for(let i=0; i<data.length; i++) {
+            for (let i = 0; i < data.length; i++) {
                 content += getStudent(data[i])
             }
             content += "</table>"
@@ -245,4 +241,5 @@ function searchByName() {
         }
     });
     event.preventDefault();
+
 }
