@@ -11,6 +11,11 @@ function saveStudent() {
     } else {
         sex = "Female"
     }
+    let arr=[]
+    $.each($('input[name="subject"]:checked'), function() {
+        var idSub = $(this).val()
+        arr.push(idSub)
+    });
     if (idStudent !== 0) {
         newStudent = {
             idStudent: idStudent,
@@ -21,7 +26,8 @@ function saveStudent() {
             },
             status: {
                 idStatus: idStatus
-            }
+            },
+            subjects: subject(arr)
         }
     } else {
         newStudent = {
@@ -55,10 +61,19 @@ function saveStudent() {
     event.preventDefault()
 
 }
-
+function subject(subject) {
+    let arr = []
+    let st
+    for (let i = 0; i < subject.length; i++) {
+        st = {idSubject : subject[i]}
+        arr.push(st)
+    }
+    return arr
+}
 function display() {
     displayAddress();
     displayStatus();
+    displaySubject();
     $.ajax({
         type: "GET",
         url: "http://localhost:8080/api/students",
@@ -83,8 +98,7 @@ function display() {
                 for (let j = 0; j < data[i].subjects.length; j++) {
                     content += `<div>  ${data[i].subjects[j].name} </div>`;
                 }
-                content += `</td><td class="btn"><button class="deleteStudent" onclick="formAddSubject(${data[i].idStudent})">+ Subject</button></td>
-                    <td class="btn"><button class="deleteStudent" onclick="deleteStudent(${data[i].idStudent})">Delete</button></td>` +
+                content += `<td class="btn"><button class="deleteStudent" onclick="deleteStudent(${data[i].idStudent})">Delete</button></td>` +
                     `<td class="btn"><button class="updateStudent" onclick="findById(${data[i].idStudent})">Update</button></td>
                </tr>`;
 
@@ -109,17 +123,16 @@ function findById(idStudent) {
     })
 }
 
-function formAddSubject(id) {
+function displaySubject() {
     $.ajax({
         type: "GET",
         url: `http://localhost:8080/api/students/subjects`,
         success: function (data) {
             let content = ''
             for (let i = 0; i < data.length; i++) {
-                content += `<option value="${data[i].idSubject}">${data[i].name}</option>`
+                content += `<input type="checkbox" name="subject" value="${data[i].idSubject}">${data[i].name}</input>`
             }
-            document.getElementById("idS").value = id
-            document.getElementById("sub3").innerHTML = content
+            document.getElementById("subject").innerHTML = content
         }
     })
 }
