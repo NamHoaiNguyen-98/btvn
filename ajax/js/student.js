@@ -3,7 +3,6 @@
 function addNewStudent() {
     let name = $('#name').val();
     let male = $('#male').prop("checked");
-    let female = $('#female').prop("checked");
     var sex
     let idAddress = $('#address').val();
     let idStatus = $('#status').val();
