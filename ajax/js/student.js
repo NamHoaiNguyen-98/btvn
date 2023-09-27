@@ -38,7 +38,8 @@ function saveStudent() {
             },
             status: {
                 idStatus: idStatus
-            }
+            },
+            subjects: subject(arr)
         }
     }
     $.ajax({
