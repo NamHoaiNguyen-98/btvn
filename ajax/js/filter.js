@@ -156,6 +156,14 @@ function  takeFilter () {
         sex: selectedSex,
         address: selectedAddress
     }
+
+    let sj = [];
+    for (let i = 0; i < selectedSubject.length; i++) {
+        sj.push({
+            idSubject : selectedSubject[i]
+        })
+    }
+
     var settings = {
         "url": "http://localhost:8080/api/students/filter",
         "method": "GET",

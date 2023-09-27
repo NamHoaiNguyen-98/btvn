@@ -30,10 +30,10 @@ public class StudentController {
         return new ResponseEntity<>(subjectService.findAll(),HttpStatus.OK);
     }
 
-    @PostMapping ("/{idStudent}/{idSubject}")
+    @GetMapping ("/{idStudent}/{idSubject}")
     public ResponseEntity<Void> sub(@PathVariable Long idStudent,@PathVariable Long idSubject){
         studentService.addSubjectStudent(idStudent,idSubject);
-        return new ResponseEntity<>(HttpStatus.CREATED);
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 
     @PostMapping

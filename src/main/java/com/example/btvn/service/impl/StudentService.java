@@ -99,7 +99,7 @@ public class StudentService implements IStudentService {
 
     @Override
     public void addSubjectStudent(Long idStudent,Long idSubject) {
-        studentRepository.addSubjectStudent(idStudent,idSubject);
+    studentRepository.addSubjectStudent(idStudent,idSubject);
     }
 
 

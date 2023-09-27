@@ -31,6 +31,6 @@ public interface IStudentRepository extends JpaRepository<Student,Long> {
     List<Student> searchBySex(String name);
 //    @Query(value = "select * from student join student_subject ss on student.idStudent = ss.student_id",nativeQuery = true)
 //    Iterable<Student> findAllSubject();
-    @Query(value = "insert into student_subject (student_id,subject_id) values (?1,?2)",nativeQuery = true)
+    @Query(value = "insert into student_subject (student_id,subject_id) values (?,?)",nativeQuery = true)
     void addSubjectStudent(Long idStudent,Long idSubject );
 }

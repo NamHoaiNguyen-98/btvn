@@ -4,7 +4,7 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
     <title>List Student</title>
     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
-    <script src="../js/student.js"></script>
+
 </head>
 <body onload="display()">
 <form id="add-student">
@@ -50,6 +50,10 @@
             <td><input type="hidden" id="idStudent"></td>
         </tr>
         <tr>
+            <td><label id="">Subject</label></td>
+            <td><label id="checkbox"></label></td>
+        </tr>
+        <tr>
             <td></td>
             <td><input id="submit" type="submit" value="Add" onclick="addNewStudent()"></td>
             <td><input type="submit" value="Update" onclick="updateStudent()"></td>
@@ -59,15 +63,13 @@
 <br>
 <div id="studentList"></div>
 <br>
-<div id="form-create-subject">
-    <h5>Add subject</h5>
-    <form>
-        <td><input type="hidden" id="idS"></td>
-        <tr> <td><label for="sub3">Subject:</label></td>
-            <select name="sub3" id="sub3"></select>
-        </tr>
-        <button id="studentID" onclick="addSubject()">Add subject</button>
-    </form>
-</div>
+<!--<div id="form-create-subject">-->
+<!--    <h5>Add subject</h5>-->
+<!--    <form >-->
+<!--        -->
+<!--        <button id="studentID" onclick="saveSubjectStudent()">Add subject</button>-->
+<!--    </form>-->
+<!--</div>-->
 </body>
+<script src="../js/student.js"></script>
 </html>
