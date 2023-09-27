@@ -82,7 +82,7 @@ public class StudentController {
         return new ResponseEntity<>(studentService.searchBySubject(id), HttpStatus.OK);
     }
 
-    @GetMapping("/filter")
+    @PostMapping("/filter")
     public ResponseEntity<Iterable<Student>> filter (@RequestBody Filter filter){
         Iterable<Student> students= studentService.filter(filter);
         return new ResponseEntity<>(students, HttpStatus.OK);
