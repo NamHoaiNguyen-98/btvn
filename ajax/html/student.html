@@ -51,6 +51,10 @@
             <td><select id="status"></select></td>
         </tr>
         <tr>
+            <td><label for="subject">Subject: </label></td>
+            <td><label id="subject"></label></td>
+        </tr>
+        <tr>
             <td></td>
             <td><input id="submit" type="submit" value="Save" onclick="saveStudent()"></td>
 
@@ -60,16 +64,16 @@
 <br>
 <div id="studentList"></div>
 <br>
-<div id="form-create-subject">
-    <h5>Add subject</h5>
-    <form>
-        <td><input type="hidden" id="idS"></td>
-        <tr> <td><label for="sub3">Subject:</label></td>
-            <select name="sub3" id="sub3"></select>
-        </tr>
-        <button id="studentID" onclick="saveSubject()">Add subject</button>
-    </form>
-</div>
+<!--<div id="form-create-subject">-->
+<!--    <h5>Add subject</h5>-->
+<!--    <form>-->
+<!--        <td><input type="hidden" id="idS"></td>-->
+<!--        <tr> <td><label for="sub3">Subject:</label></td>-->
+<!--            <select name="sub3" id="sub3"></select>-->
+<!--        </tr>-->
+<!--        <button id="studentID" onclick="saveSubject()">Add subject</button>-->
+<!--    </form>-->
+<!--</div>-->
 </body>
 <script src="../js/student.js"></script>
 <script src="../js/filter.js"></script>
