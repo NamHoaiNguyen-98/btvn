@@ -23,8 +23,8 @@ public class StatusController {
     }
 
     @PostMapping
-    public ResponseEntity<Status> create(@RequestBody Status status){
-        statusService.create(status);
+    public ResponseEntity<?> create(@RequestBody Status status){
+        statusService.save(status);
         return new ResponseEntity<>(HttpStatus.CREATED);
     }
     @GetMapping("/{idStatus}")
@@ -35,13 +35,4 @@ public class StatusController {
         } return new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
 
-    @PutMapping("/{idStatus}")
-    public ResponseEntity<Status> update(@PathVariable("idStatus") Long idStatus,
-                                         @RequestBody Status status) {
-        Optional<Status> statusOptional = statusService.findOne(idStatus);
-        if(statusOptional.isPresent()) {
-            status.setIdStatus(idStatus);
-            return new ResponseEntity<>(statusService.update(status),HttpStatus.OK);
-        } return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-    }
 }

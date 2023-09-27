@@ -37,8 +37,8 @@ public class StudentController {
     }
 
     @PostMapping
-    public ResponseEntity<Student> create(@RequestBody Student student) {
-        studentService.create(student);
+    public ResponseEntity<?> save(@RequestBody Student student) {
+        studentService.save(student);
         return new ResponseEntity<>(HttpStatus.CREATED);
     }
 
@@ -51,16 +51,7 @@ public class StudentController {
         return new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
 
-    @PutMapping("/{idStudent}")
-    public ResponseEntity<Student> update(@PathVariable("idStudent") Long idStudent,
-                                          @RequestBody Student student) {
-        Optional<Student> studentOptional = studentService.findOne(idStudent);
-        if (studentOptional.isPresent()) {
-            student.setIdStudent(idStudent);
-            return new ResponseEntity<>(studentService.update(student), HttpStatus.OK);
-        }
-        return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-    }
+
     @DeleteMapping("/{idStudent}")
     public ResponseEntity<Student> delete(@PathVariable("idStudent") Long idStudent) {
         Optional<Student> studentOptional = studentService.findOne(idStudent);
