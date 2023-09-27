@@ -7,9 +7,9 @@ function saveStudent() {
     let idStatus = $('#status').val();
     let idStudent = +localStorage.getItem("idUpdate")
     if (male) {
-        sex = "Male"
+        sex = "Nam"
     } else {
-        sex = "Female"
+        sex = "Nữ"
     }
     let arr=[]
     $.each($('input[name="subject"]:checked'), function() {
@@ -116,9 +116,11 @@ function findById(idStudent) {
         url: `http://localhost:8080/api/students/${idStudent}`,
         success: function (student) {
             $("#name").val(`${student.name}`);
-            $("#sex").val(`${student.sex}`);
-            $("#address").val(`${student.address}`);
-            $("#status").val(`${student.status}`);
+            $("#male").prop("checked", student.sex === "Nam");
+            $("#female").prop("checked", student.sex === "Nữ");
+            // $("#sex").val(`${student.sex}`);
+            $("#address").val(`${student.address.id}`);
+            $("#status").val(`${student.status.idStatus}`);
             localStorage.setItem("idUpdate", student.idStudent)
         }
     })
@@ -240,18 +242,33 @@ function searchByName() {
         type: "GET",
         url: `http://localhost:8080/api/students/searchByName/${name}`,
         success: function (data) {
-            let content = ' <table id="display-list" border="1"><tr>\n' +
-                ' <th>Name</td>\n' +
-                ' <th>Sex</td>\n' +
-                ' <th>Address</td>\n' +
-                ' <th>Status</td>\n' +
-                ' <th colspan="2">Option</td>\n' +
-                ' </tr>';
-            for (let i = 0; i < data.length; i++) {
-                content += getStudent(data[i])
-            }
-            content += "</table>"
-            document.getElementById('studentList').innerHTML = content;
+                let content = ' <table id="display-list" border="1"><tr>\n' +
+                    ' <th>ID</th></td>\n' +
+                    ' <th>Name</td>\n' +
+                    ' <th>Sex</td>\n' +
+                    ' <th>Address</td>\n' +
+                    ' <th>Status</td>\n' +
+                    ' <th>Subject</td>\n' +
+                    ' <th colspan="3">Option</td>\n' +
+                    ' </tr>';
+                for (let i = 0; i < data.length; i++) {
+                    content += `<tr>
+               <td>${data[i].idStudent}</td>
+               <td>${data[i].name}</td>
+               <td>${data[i].sex}</td>
+               <td>${data[i].address.name}</td>` +
+                        `<td>${data[i].status.name}</td>`
+                    content += "<td>"
+                    for (let j = 0; j < data[i].subjects.length; j++) {
+                        content += `<div>  ${data[i].subjects[j].name} </div>`;
+                    }
+                    content += `<td class="btn"><button class="deleteStudent" onclick="deleteStudent(${data[i].idStudent})">Delete</button></td>` +
+                        `<td class="btn"><button class="updateStudent" onclick="findById(${data[i].idStudent})">Update</button></td>
+               </tr>`;
+
+                }
+                content += "</table>"
+                document.getElementById('studentList').innerHTML = content;
         }
     });
     event.preventDefault();
