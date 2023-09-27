@@ -4,6 +4,7 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
     <title>List Student</title>
     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="../css/cssStudent.css">
 </head>
 <a href="subject.html">Register Subject</a>
 <body onload="display()">
@@ -25,6 +26,8 @@
     </form>
     <hr>
     <h2>Form</h2>
+    <button onclick="displayFt()">Filter</button>
+    <div id="filter"></div>
     <table>
         <tr>
             <td><label for="name">Name:</label></td>
@@ -69,4 +72,6 @@
 </div>
 </body>
 <script src="../js/student.js"></script>
+<script src="../js/filter.js"></script>
+
 </html>

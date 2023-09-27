@@ -96,32 +96,34 @@ function  takeFilter () {
         url: "http://localhost:8080/api/students/filter",
         success: function (data) {
             let content = ' <table id="display-list" border="1"><tr>\n' +
+                ' <th>ID</th></td>\n' +
                 ' <th>Name</td>\n' +
                 ' <th>Sex</td>\n' +
                 ' <th>Address</td>\n' +
                 ' <th>Status</td>\n' +
                 ' <th>Subject</td>\n' +
-                // ' <th colspan="3">Option</td>\n' +
+                ' <th colspan="3">Option</td>\n' +
                 ' </tr>';
-            for(let i=0; i<data.length; i++) {
+            for (let i = 0; i < data.length; i++) {
                 content += `<tr>
+               <td>${data[i].idStudent}</td>
                <td>${data[i].name}</td>
                <td>${data[i].sex}</td>
-               <td>${data[i].address.name}</td>`+
+               <td>${data[i].address.name}</td>` +
                     `<td>${data[i].status.name}</td>`
-                content+= "<td>"
-                for (let j=0;  j<data[i].subjects.length; j++) {
+                content += "<td>"
+                for (let j = 0; j < data[i].subjects.length; j++) {
                     content += `<div>  ${data[i].subjects[j].name} </div>`;
                 }
-                // `</td><td class="btn"><button class="deleteStudent" onclick="formAddSubject(${data[i].idStudent})">+ Subject</button></td>
-                //     // <td class="btn"><button class="deleteStudent" onclick="deleteStudent(${data[i].idStudent})">Delete</button></td>` +
-                    // `<td class="btn"><button class="updateStudent" onclick="findById(${data[i].idStudent})">Update</button></td>
-                content+=  " </tr>";
+                content += `</td><td class="btn"><button class="deleteStudent" onclick="formAddSubject(${data[i].idStudent})">+ Subject</button></td>
+                    <td class="btn"><button class="deleteStudent" onclick="deleteStudent(${data[i].idStudent})">Delete</button></td>` +
+                    `<td class="btn"><button class="updateStudent" onclick="findById(${data[i].idStudent})">Update</button></td>
+               </tr>`;
 
             }
             content += "</table>"
-            console.log(content)
             document.getElementById('studentList').innerHTML = content;
+            document.getElementById("filter").style.display = "none";
         }
 
     });
@@ -134,5 +136,34 @@ function getStudent(student) {
                <td>${student.address.name}</td>
                <td>${student.status.name}</td>
                </tr>`;
+}
+function displayFt () {
+    let content = '' ;
+    content += ` <form >
+        <label id="FTStatus">
+
+        </label>
+        <br>
+            <label id="FTSubjects">
+
+            </label>
+            <br>
+                <label id="FTAddress">
+                </label>
+                <br>
+                    <label id="FTSex">
+                        <input type="checkbox" className="sex" name="sex" value="Nam"> Nam
+                            <input type="checkbox" className="sex"  name="sex" value="Nữ"> Nữ
+                    </label>
+                    <br>
+                        <button id="getDataButton"  onclick="takeFilter()">Lấy dữ liệu</button>
+        <!--            onclick="filter()"-->
+
+
+    </form> `
+    displayFilter()
+    document.getElementById("filter").innerHTML = content ;
+    document.getElementById("filter").style.display = "block";
+
 }
 
