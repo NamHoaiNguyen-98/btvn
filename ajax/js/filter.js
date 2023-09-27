@@ -1,4 +1,4 @@
-function displayAddress() {
+function displayAddressFt() {
     $.ajax({
         type: "GET",
         url: "http://localhost:8080/api/addresses",
@@ -13,7 +13,7 @@ function displayAddress() {
     })
 }
 
-function displayStatus() {
+function displayStatusFt() {
     $.ajax({
         type: "GET",
         url: "http://localhost:8080/api/status",
@@ -27,7 +27,7 @@ function displayStatus() {
     })
 }
 
-function displaySubject() {
+function displaySubjectFt() {
     $.ajax({
         type: "GET",
         url: "http://localhost:8080/api/subjects",
@@ -42,9 +42,9 @@ function displaySubject() {
 }
 
 function displayFilter() {
-    displayAddress()
-    displayStatus()
-    displaySubject()
+    displayAddressFt()
+    displayStatusFt()
+    displaySubjectFt()
 
 }
 
