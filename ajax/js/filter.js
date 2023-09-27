@@ -64,7 +64,7 @@ function  takeFilter () {
     });
 
     let selectedSex = [];
-    $.each($('input[name="sex"]:checked'), function() {
+    $.each($('input[name="sexft"]:checked'), function() {
         var value = $(this).val()
         selectedSex.push(value)
     });
@@ -140,6 +140,7 @@ function getStudent(student) {
 function displayFt () {
     let content = '' ;
     content += ` <form >
+ 
         <label id="FTStatus">
 
         </label>
@@ -152,8 +153,8 @@ function displayFt () {
                 </label>
                 <br>
                     <label id="FTSex">
-                        <input type="checkbox" className="sex" name="sex" value="Nam"> Nam
-                            <input type="checkbox" className="sex"  name="sex" value="Nữ"> Nữ
+                        <input type="checkbox" className="sex" name="sexft" value="Nam"> Nam
+                            <input type="checkbox" className="sex"  name="sexft" value="Nữ"> Nữ
                     </label>
                     <br>
                         <button id="getDataButton"  onclick="takeFilter()">Lấy dữ liệu</button>
