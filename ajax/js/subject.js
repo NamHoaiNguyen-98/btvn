@@ -102,7 +102,7 @@ function edit(id) {
         type: "POST",
         data: JSON.stringify(subject),
         //tên API
-        url: `http://localhost:8080/api/subjects/${id}`,
+        url: `http://localhost:8080/api/subjects`,
         //xử lý khi thành công
         success: successHandler
     });
