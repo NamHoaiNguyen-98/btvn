@@ -2,9 +2,11 @@ function saveSubject() {
     let newSubject;
     //lấy dữ liệu từ form html
     let name = $("#name").val();
+    let capacity = $("#capacity").val();
 
     newSubject = {
         name: name,
+        capacity: capacity
     };
     // gọi phương thức ajax
     $.ajax({
@@ -18,11 +20,12 @@ function saveSubject() {
         url: "http://localhost:8080/api/subjects",
         //xử lý khi thành công
         success: successHandler
+
     });
 
 
     //chặn sự kiện mặc định của thẻ
-    event.preventDefault();
+
 
 }
 
@@ -34,7 +37,7 @@ function successHandler() {
         //xử lý khi thành công
         success: function (data) {
             // hiển thị danh sách ở đây
-            let content = ' <table id="display-list" border="1"><tr>\n' +
+            let content = ' <table id="display-list" class="table table-striped">><tr>\n' +
                 ' <th>Name</td>\n' +
                 ' <th>Capacity</td>\n' +
                 ' <th>Action</td>\n' +
@@ -96,7 +99,7 @@ function edit(id) {
             'Accept': 'application/json',
             'Content-Type': 'application/json'
         },
-        type: "PUT",
+        type: "POST",
         data: JSON.stringify(subject),
         //tên API
         url: `http://localhost:8080/api/subjects/${id}`,
@@ -104,7 +107,7 @@ function edit(id) {
         success: successHandler
     });
     alert("Update done!")
-    event.preventDefault();
+
 }
 
 function formRegister() {

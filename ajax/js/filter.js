@@ -141,18 +141,21 @@ function getStudent(student) {
 function displayFt () {
     let content = '' ;
     content += ` <form >
- 
+        <label for="">Status: </label>
         <label id="FTStatus">
-
+         
         </label>
         <br>
+            <label for="">Subjects: </label>
             <label id="FTSubjects">
-
+            
             </label>
             <br>
-                <label id="FTAddress">
+            <label for="">Address</label>
+                <label id="FTAddress">Address: 
                 </label>
                 <br>
+                <label for="">Sex: </label>
                     <label id="FTSex">
                         <input type="checkbox" className="sex" name="sexft" value="Nam"> Nam
                             <input type="checkbox" className="sex"  name="sexft" value="Nữ"> Nữ

@@ -223,14 +223,16 @@ function displayAddress() {
 }
 
 function deleteStudent(idStudent) {
-    $.ajax({
-        url: `http://localhost:8080/api/students/${idStudent}`,
-        type: "DELETE",
-        success: function () {
-            alert("Delete successfully!")
-            display()
-        }
-    });
+    if (confirm("Do you want to delete?")) {
+        $.ajax({
+            url: `http://localhost:8080/api/students/${idStudent}`,
+            type: "DELETE",
+            success: function () {
+                alert("Delete successfully!")
+                display()
+            }
+        });
+    }
 }
 
 
