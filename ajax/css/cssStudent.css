@@ -3,8 +3,10 @@ div#filter{
     position: relative;
     background-color: aquamarine ;
     width: 600px;
+
 }
 .form-option form{
     display: flex;
     margin-top: 1%;
+
 }

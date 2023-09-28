@@ -57,9 +57,7 @@ function displayFormCreate() {
     $('#subjectList').hide();
 
 }
-function displayFormSave() {
-    document.getElementById("form-save-student").style.display="block"
-}
+
 function getSubject(subject) {
     return `<tr><td >${subject.name}</td>
             <td >${subject.capacity}</td>` +

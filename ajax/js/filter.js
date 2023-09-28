@@ -95,28 +95,30 @@ function  takeFilter () {
         data: JSON.stringify(newFilter),
         url: "http://localhost:8080/api/students/filter",
         success: function (data) {
-            let content = ' <table id="display-list" border="1"><tr>\n' +
-                ' <th>ID</th></td>\n' +
-                ' <th>Name</td>\n' +
-                ' <th>Sex</td>\n' +
-                ' <th>Address</td>\n' +
-                ' <th>Status</td>\n' +
-                ' <th>Subject</td>\n' +
-                ' <th colspan="3">Option</td>\n' +
+            let content = ' <table id="display-list" class="table table-striped"><tr>\n' +
+                ' <th scope="col">ID</th></td>\n' +
+                ' <th scope="col">Name</td>\n' +
+                ' <th scope="col">Sex</td>\n' +
+                ' <th scope="col">Address</td>\n' +
+                ' <th scope="col">Status</td>\n' +
+                ' <th scope="col">Count Subject</td>\n' +
+                ' <th scope="col">Subject</td>\n' +
+                ' <th colspan="3"   >Option</td>\n' +
                 ' </tr>';
             for (let i = 0; i < data.length; i++) {
                 content += `<tr>
-               <td>${data[i].idStudent}</td>
-               <td>${data[i].name}</td>
-               <td>${data[i].sex}</td>
-               <td>${data[i].address.name}</td>` +
-                    `<td>${data[i].status.name}</td>`
-                content += "<td>"
+               <td scope="row"> ${data[i].idStudent}</td>
+               <td scope="row">${data[i].name}</td>
+               <td scope="row">${data[i].sex}</td>
+               <td scope="row"> ${data[i].address.name}</td>` +
+                    `<td>${data[i].status.name}</td>`+
+                    `<td>${data[i].subjects.length}</td>`
+                    +"<td scope=\"row\">"
                 for (let j = 0; j < data[i].subjects.length; j++) {
                     content += `<div>  ${data[i].subjects[j].name} </div>`;
                 }
-                content += `     <td class="btn"><button class="deleteStudent" onclick="deleteStudent(${data[i].idStudent})">Delete</button></td>` +
-                    `<td class="btn"><button class="updateStudent" onclick="findById(${data[i].idStudent})">Update</button></td>
+                content += `<td  ><button class="btn btn-danger" class="deleteStudent" onclick="deleteStudent(${data[i].idStudent})">Delete</button></td>` +
+                    `<td  class="btn"><button class="btn btn-warning" class="updateStudent" onclick="findById(${data[i].idStudent})">Update</button></td>
                </tr>`;
 
             }

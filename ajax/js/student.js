@@ -87,30 +87,30 @@ function display() {
         type: "GET",
         url: "http://localhost:8080/api/students",
         success: function (data) {
-            let content = ' <table id="display-list" border="1" style="text-align: center"><tr>\n' +
-                ' <th>ID</th></td>\n' +
-                ' <th>Name</td>\n' +
-                ' <th>Sex</td>\n' +
-                ' <th>Address</td>\n' +
-                ' <th>Status</td>\n' +
-                ' <th>Count Subject</td>\n' +
-                ' <th>Subject</td>\n' +
-                ' <th colspan="3">Option</td>\n' +
+            let content = ' <table id="display-list" class="table table-striped"><tr>\n' +
+                ' <th scope="col">ID</th></td>\n' +
+                ' <th scope="col">Name</td>\n' +
+                ' <th scope="col">Sex</td>\n' +
+                ' <th scope="col">Address</td>\n' +
+                ' <th scope="col">Status</td>\n' +
+                ' <th scope="col">Count Subject</td>\n' +
+                ' <th scope="col">Subject</td>\n' +
+                ' <th colspan="3"   >Option</td>\n' +
                 ' </tr>';
             for (let i = 0; i < data.length; i++) {
                 content += `<tr>
-               <td>${data[i].idStudent}</td>
-               <td>${data[i].name}</td>
-               <td>${data[i].sex}</td>
-               <td>${data[i].address.name}</td>` +
+               <td scope="row"> ${data[i].idStudent}</td>
+               <td scope="row">${data[i].name}</td>
+               <td scope="row">${data[i].sex}</td>
+               <td scope="row"> ${data[i].address.name}</td>` +
                     `<td>${data[i].status.name}</td>`+
                     `<td>${data[i].subjects.length}</td>`
-                +"<td>"
+                +"<td scope=\"row\">"
                 for (let j = 0; j < data[i].subjects.length; j++) {
                     content += `<div>  ${data[i].subjects[j].name} </div>`;
                 }
-                content += `<td class="btn"><button class="deleteStudent" onclick="deleteStudent(${data[i].idStudent})">Delete</button></td>` +
-                    `<td class="btn"><button class="updateStudent" onclick="findById(${data[i].idStudent})">Update</button></td>
+                content += `<td  ><button class="btn btn-danger" class="deleteStudent" onclick="deleteStudent(${data[i].idStudent})">Delete</button></td>` +
+                    `<td  class="btn"><button class="btn btn-warning" class="updateStudent" onclick="findById(${data[i].idStudent})">Update</button></td>
                </tr>`;
 
             }
@@ -143,7 +143,8 @@ function displaySubject() {
         success: function (data) {
             let content = ''
             for (let i = 0; i < data.length; i++) {
-                content += `<input class="form-check-input mt-3"  type="checkbox" name="subject" value="${data[i].idSubject}" aria-label="Checkbox for following text input">${data[i].name}</input>`
+                content += `<input class="form-check-input mt-2"  type="checkbox" name="subject" value="${data[i].idSubject}" aria-label="Checkbox for following text input">&nbsp;${data[i].name}`
+                content+= "&nbsp;&nbsp;&nbsp;&nbsp;"
             }
             document.getElementById("subject").innerHTML = content
         }
@@ -170,7 +171,7 @@ function displayStatus() {
                 content += `<option value =${data[i].idStatus} > ${data[i].name} </option>`;
             }
             document.getElementById("status").innerHTML = content;
-            document.getElementById("searchStatus").innerHTML = content;
+            // document.getElementById("searchStatus").innerHTML = content;
         }
     })
 }
@@ -202,6 +203,9 @@ function searchByStatus() {
 
 function searchBySubject() {
 
+}
+function displayFormSave() {
+    document.getElementById("form-save-student").style.display="block"
 }
 
 function displayAddress() {
@@ -236,33 +240,35 @@ function searchByName() {
         type: "GET",
         url: `http://localhost:8080/api/students/searchByName/${name}`,
         success: function (data) {
-                let content = ' <table id="display-list" border="1"><tr>\n' +
-                    ' <th>ID</th></td>\n' +
-                    ' <th>Name</td>\n' +
-                    ' <th>Sex</td>\n' +
-                    ' <th>Address</td>\n' +
-                    ' <th>Status</td>\n' +
-                    ' <th>Subject</td>\n' +
-                    ' <th colspan="3">Option</td>\n' +
-                    ' </tr>';
-                for (let i = 0; i < data.length; i++) {
-                    content += `<tr>
-               <td>${data[i].idStudent}</td>
-               <td>${data[i].name}</td>
-               <td>${data[i].sex}</td>
-               <td>${data[i].address.name}</td>` +
-                        `<td>${data[i].status.name}</td>`
-                    content += "<td>"
-                    for (let j = 0; j < data[i].subjects.length; j++) {
-                        content += `<div>  ${data[i].subjects[j].name} </div>`;
-                    }
-                    content += `<td class="btn"><button class="deleteStudent" onclick="deleteStudent(${data[i].idStudent})">Delete</button></td>` +
-                        `<td class="btn"><button class="updateStudent" onclick="findById(${data[i].idStudent})">Update</button></td>
+            let content = ' <table id="display-list" class="table table-striped"><tr>\n' +
+                ' <th scope="col">ID</th></td>\n' +
+                ' <th scope="col">Name</td>\n' +
+                ' <th scope="col">Sex</td>\n' +
+                ' <th scope="col">Address</td>\n' +
+                ' <th scope="col">Status</td>\n' +
+                ' <th scope="col">Count Subject</td>\n' +
+                ' <th scope="col">Subject</td>\n' +
+                ' <th colspan="3"   >Option</td>\n' +
+                ' </tr>';
+            for (let i = 0; i < data.length; i++) {
+                content += `<tr>
+               <td scope="row"> ${data[i].idStudent}</td>
+               <td scope="row">${data[i].name}</td>
+               <td scope="row">${data[i].sex}</td>
+               <td scope="row"> ${data[i].address.name}</td>` +
+                    `<td>${data[i].status.name}</td>`+
+                    `<td>${data[i].subjects.length}</td>`
+                    +"<td scope=\"row\">"
+                for (let j = 0; j < data[i].subjects.length; j++) {
+                    content += `<div>  ${data[i].subjects[j].name} </div>`;
+                }
+                content += `<td  ><button class="btn btn-danger" class="deleteStudent" onclick="deleteStudent(${data[i].idStudent})">Delete</button></td>` +
+                    `<td  class="btn"><button class="btn btn-warning" class="updateStudent" onclick="findById(${data[i].idStudent})">Update</button></td>
                </tr>`;
 
-                }
-                content += "</table>"
-                document.getElementById('studentList').innerHTML = content;
+            }
+            content += "</table>"
+            document.getElementById('studentList').innerHTML = content;
         }
     });
     event.preventDefault();
