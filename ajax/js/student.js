@@ -65,9 +65,11 @@ function saveStudent() {
 
     })
     document.getElementById("form").reset()
+    document.getElementById("form-save-student").style.display='none'
     event.preventDefault()
 
 }
+
 function subject(subject) {
     let arr = []
     let st
@@ -119,6 +121,7 @@ function display() {
 }
 
 function findById(idStudent) {
+    document.getElementById("form-save-student").style.display='block'
     $.ajax({
         type: "GET",
         url: `http://localhost:8080/api/students/${idStudent}`,
@@ -140,28 +143,12 @@ function displaySubject() {
         success: function (data) {
             let content = ''
             for (let i = 0; i < data.length; i++) {
-                content += `<input type="checkbox" name="subject" value="${data[i].idSubject}">${data[i].name}</input>`
+                content += `<input class="form-check-input mt-3"  type="checkbox" name="subject" value="${data[i].idSubject}" aria-label="Checkbox for following text input">${data[i].name}</input>`
             }
             document.getElementById("subject").innerHTML = content
         }
     })
 }
-
-function saveSubject() {
-    let id = document.getElementById("idS").value
-    let idSubject = document.getElementById("sub3").value
-    console.log(id)
-    $.ajax({
-        headers: {
-            'Accept': 'application/json',
-            'Content-Type': 'application/json'
-        },
-        type: "POST",
-        url: `http://localhost:8080/api/students/${id}/${idSubject}`,
-        success: display
-    })
-}
-
 function getStudent(student) {
     return `<tr>
                <td>${student.name}</td>

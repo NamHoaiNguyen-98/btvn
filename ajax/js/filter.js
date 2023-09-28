@@ -115,8 +115,7 @@ function  takeFilter () {
                 for (let j = 0; j < data[i].subjects.length; j++) {
                     content += `<div>  ${data[i].subjects[j].name} </div>`;
                 }
-                content += `</td><td class="btn"><button class="deleteStudent" onclick="formAddSubject(${data[i].idStudent})">+ Subject</button></td>
-                    <td class="btn"><button class="deleteStudent" onclick="deleteStudent(${data[i].idStudent})">Delete</button></td>` +
+                content += `     <td class="btn"><button class="deleteStudent" onclick="deleteStudent(${data[i].idStudent})">Delete</button></td>` +
                     `<td class="btn"><button class="updateStudent" onclick="findById(${data[i].idStudent})">Update</button></td>
                </tr>`;
 
